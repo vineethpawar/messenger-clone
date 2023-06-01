@@ -4,8 +4,8 @@ import Sidebar from "../components/Sidebar";
 
 const App: React.FC = () => {
   return (
-    <HStack p={{ base: 3, lg: 7 }} flex={1} bg="appBG">
-      <Box p={4} maxW={"400px"} flex={1}>
+    <HStack p={{ base: 3, lg: 7 }} h={"100vh"} w={"100%"} bg="appBG">
+      <Box p={4} minW={"340px"} maxW={"400px"} flex={1}>
         <Sidebar />
       </Box>
       <Box flex={3}></Box>

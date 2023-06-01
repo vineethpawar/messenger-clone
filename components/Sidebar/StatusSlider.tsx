@@ -1,25 +1,24 @@
 import IonIcon from "@reacticons/ionicons";
 import { Box, Pressable, ScrollView, Skeleton } from "native-base";
-import React, { Suspense } from "react";
+import React from "react";
 
 const StatusSlider: React.FC = () => {
   return (
-    <Suspense fallback={<SkeletonUI />}>
-      <ScrollView
-        w={"100%"}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        py={4}
-        my={4}
-      >
-        <StatusItem type="add_status" />
-        <StatusItem />
-        <StatusItem />
-        <StatusItem />
-        <StatusItem />
-        <StatusItem />
-      </ScrollView>
-    </Suspense>
+    <ScrollView
+      w={"100%"}
+      showsHorizontalScrollIndicator={false}
+      horizontal
+      py={4}
+      my={4}
+      maxH={"105px"}
+    >
+      <StatusItem type="add_status" />
+      <StatusItem />
+      <StatusItem />
+      <StatusItem />
+      <StatusItem />
+      <StatusItem />
+    </ScrollView>
   );
 };
 
@@ -56,7 +55,7 @@ const StatusItem: React.FC<StatusItemProps> = ({ type = "default" }) => {
   );
 };
 
-const SkeletonUI = () => {
+export const StatusSliderSkeletonUI = () => {
   return (
     <ScrollView
       w={"100%"}
@@ -64,6 +63,7 @@ const SkeletonUI = () => {
       horizontal
       py={4}
       my={4}
+      maxH={"105px"}
     >
       <Skeleton
         startColor={"gray.500"}
