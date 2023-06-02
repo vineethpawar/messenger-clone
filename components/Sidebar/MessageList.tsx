@@ -15,15 +15,19 @@ const MessageList = () => {
   return (
     <>
       <HStack alignItems={"center"} p={3}>
-        <Text
-          fontSize={18}
-          fontWeight={500}
-          fontFamily={"Lato"}
-          color={"white"}
-          flex={3}
-        >
-          Messages <IonIcon name="chevron-down-outline" />
-        </Text>
+        <Pressable mr="auto">
+          <HStack space={2} alignItems={"center"}>
+            <Text
+              fontSize={18}
+              fontWeight={500}
+              fontFamily={"Lato"}
+              color={"white"}
+            >
+              Messages
+            </Text>
+            <IonIcon style={{ color: "white" }} name="chevron-down-outline" />
+          </HStack>
+        </Pressable>
         <Pressable
           _hover={{ bg: "gray.600" }}
           rounded={"full"}
