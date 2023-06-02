@@ -14,7 +14,7 @@ import IonIcon from "@reacticons/ionicons";
 const MessageList = () => {
   return (
     <>
-      <HStack alignItems={"center"} p={3}>
+      <HStack alignItems={"center"} px={3}>
         <Pressable mr="auto">
           <HStack space={2} alignItems={"center"}>
             <Text
@@ -85,9 +85,10 @@ export const MessageListSkeletonUI = () => {
   return (
     <>
       <Skeleton
-        my={6}
+        my={1}
+        mb={4}
         rounded={"full"}
-        h="25px"
+        h="30px"
         w={"100%"}
         startColor={"gray.500"}
         endColor={"gray.700"}

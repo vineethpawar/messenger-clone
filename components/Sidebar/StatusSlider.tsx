@@ -8,9 +8,9 @@ const StatusSlider: React.FC = () => {
       w={"100%"}
       showsHorizontalScrollIndicator={false}
       horizontal
-      py={4}
-      my={4}
-      maxH={"105px"}
+      py={3}
+      my={1}
+      maxH={"95px"}
     >
       <StatusItem type="add_status" />
       <StatusItem />
@@ -61,9 +61,9 @@ export const StatusSliderSkeletonUI = () => {
       w={"100%"}
       showsHorizontalScrollIndicator={false}
       horizontal
-      py={4}
-      my={4}
-      maxH={"105px"}
+      py={3}
+      my={1}
+      maxH={"95px"}
     >
       <Skeleton
         startColor={"gray.500"}
