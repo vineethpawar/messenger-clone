@@ -36,7 +36,7 @@ const SharedPhotos = () => {
   const images = Array(4).fill(0);
 
   return (
-    <VStack space={2}>
+    <VStack space={2} mb={4}>
       <HStack px={1} alignItems={"center"}>
         <Text
           fontSize={18}
@@ -80,7 +80,7 @@ const SharedPhotos = () => {
 export const SharedPhotosSkeletonUI = () => {
   const images = Array(4).fill(0);
   return (
-    <VStack space={2}>
+    <VStack space={2} mb={4}>
       <Box px={1}>
         <Skeleton
           rounded={"full"}

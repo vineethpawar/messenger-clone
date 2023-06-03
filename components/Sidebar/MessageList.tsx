@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  Box,
-  HStack,
-  Pressable,
-  ScrollView,
-  Skeleton,
-  Text,
-  VStack,
-} from "native-base";
+import { HStack, Pressable, ScrollView, Skeleton, Text } from "native-base";
 import MessageListItem from "../common/MessageListItem";
 import IonIcon from "@reacticons/ionicons";
+import SkeletonListItem from "../common/MessageListItem/SkeletonListItem";
 
 const MessageList = () => {
   return (
@@ -56,32 +49,6 @@ const MessageList = () => {
 };
 
 export const MessageListSkeletonUI = () => {
-  const SkeletonListItem = () => {
-    return (
-      <HStack mb={9} space={2} alignItems={"center"}>
-        <Skeleton
-          rounded={"full"}
-          size={"70px"}
-          startColor={"gray.500"}
-          endColor={"gray.700"}
-        />
-        <VStack space={4} alignItems={"center"} flex={1}>
-          <Skeleton
-            h="20px"
-            rounded="full"
-            startColor={"gray.500"}
-            endColor={"gray.700"}
-          />
-          <Skeleton
-            h="20px"
-            rounded="full"
-            startColor={"gray.500"}
-            endColor={"gray.700"}
-          />
-        </VStack>
-      </HStack>
-    );
-  };
   return (
     <>
       <Skeleton
