@@ -30,8 +30,8 @@ const MessageList = () => {
         </Pressable>
         <Pressable
           _hover={{ bg: "gray.600" }}
-          rounded={"full"}
-          p={2}
+          rounded={"lg"}
+          p={"6px"}
           mr={-2}
           onPress={() => {}}
         >

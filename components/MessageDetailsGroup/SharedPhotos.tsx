@@ -1,10 +1,8 @@
-import { Box, HStack, Pressable, Text, VStack } from "native-base";
+import { Box, HStack, Pressable, Skeleton, Text, VStack } from "native-base";
 import React from "react";
 
-const SharedPhotos = () => {
-  const images = Array(4).fill(0);
-
-  const ImageGridItem = ({ dimensionType = "square" }) => {
+const ImageGridItem = ({ dimensionType = "square", isLoading = false }) => {
+  if (isLoading)
     return (
       <Box
         p={1}
@@ -13,10 +11,30 @@ const SharedPhotos = () => {
         }}
         width={dimensionType === "square" ? "40%" : "60%"}
       >
-        <Box rounded={"lg"} size="100%" bg={"gray.200"} />
+        <Skeleton
+          rounded={"lg"}
+          size="100%"
+          startColor={"gray.500"}
+          endColor={"gray.700"}
+        />
       </Box>
     );
-  };
+  return (
+    <Box
+      p={1}
+      style={{
+        aspectRatio: dimensionType === "square" ? 1 : 2,
+      }}
+      width={dimensionType === "square" ? "40%" : "60%"}
+    >
+      <Box rounded={"lg"} size="100%" bg={"gray.200"} />
+    </Box>
+  );
+};
+
+const SharedPhotos = () => {
+  const images = Array(4).fill(0);
+
   return (
     <VStack space={2}>
       <HStack px={1} alignItems={"center"}>
@@ -59,5 +77,30 @@ const SharedPhotos = () => {
   );
 };
 
+export const SharedPhotosSkeletonUI = () => {
+  const images = Array(4).fill(0);
+  return (
+    <VStack space={2}>
+      <Box px={1}>
+        <Skeleton
+          rounded={"full"}
+          h="28px"
+          w={"100%"}
+          startColor={"gray.500"}
+          endColor={"gray.700"}
+        />
+      </Box>
+      <HStack flexWrap={"wrap"}>
+        {images?.map((img, idx) => (
+          <ImageGridItem
+            isLoading
+            dimensionType={
+              idx % 4 === 1 || idx % 4 === 2 ? "rectangle" : "square"
+            }
+          />
+        ))}
+      </HStack>
+    </VStack>
+  );
+};
 export default SharedPhotos;
-// generate js logic to know if number comes under this pattern 1,2,5,6,9,10,13,14...

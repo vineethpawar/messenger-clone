@@ -69,22 +69,24 @@ const ActionIcons = () => {
           color={"white"}
           flex={1}
         >
-          Chat
+          Chat Details
         </Text>
         <Pressable onPress={() => {}}>
           {({ isHovered }) => (
-            <Text
-              onPress={() => {}}
-              fontSize={14}
-              fontWeight={500}
-              fontFamily={"Lato"}
-              color={isHovered ? "light.100" : "light.400"}
-              style={{
-                textDecorationLine: "underline",
-              }}
+            <Box
+              rounded="lg"
+              p={"1px"}
+              bg={isHovered ? "light.600" : "transparent"}
             >
-              See all
-            </Text>
+              <IonIcon
+                // @ts-ignore
+                name={"close-outline"}
+                style={{
+                  fontSize: "25px",
+                  color: isHovered ? highlight : light,
+                }}
+              />
+            </Box>
           )}
         </Pressable>
       </HStack>
