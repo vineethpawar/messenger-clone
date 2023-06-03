@@ -3,10 +3,15 @@ import { Box, HStack, Pressable, Text, VStack, useToken } from "native-base";
 import React from "react";
 interface MessageListItemProps {
   isSelected?: boolean;
+  type?: "default" | "link";
+  isUserOnline?: boolean;
 }
 const MessageListItem: React.FC<MessageListItemProps> = ({
   isSelected = false,
+  type = "default",
+  isUserOnline = false,
 }) => {
+  const isTypeDefault = type === "default";
   const appPrimaryColor = useToken("colors", "appPrimary");
   const MessageStatusIcon = ({
     status,
@@ -61,8 +66,13 @@ const MessageListItem: React.FC<MessageListItemProps> = ({
       bg={isSelected ? "gray.700" : "transparent"}
     >
       <HStack space={2} alignItems={"center"}>
-        <Box position={"relative"} rounded={"full"} size={"70px"} bg="gray.400">
-          {true && (
+        <Box
+          position={"relative"}
+          rounded={isTypeDefault ? "full" : "lg"}
+          size={isTypeDefault ? "70px" : "50px"}
+          bg="gray.400"
+        >
+          {isUserOnline && (
             <Box
               borderWidth={2}
               borderColor={"appBG"}
@@ -75,7 +85,7 @@ const MessageListItem: React.FC<MessageListItemProps> = ({
             />
           )}
         </Box>
-        <VStack space={3} flex={1}>
+        <VStack space={isTypeDefault ? 3 : 0} flex={1}>
           <HStack alignItems={"center"} justifyContent={"space-between"}>
             <Text
               flex={1}
@@ -88,14 +98,16 @@ const MessageListItem: React.FC<MessageListItemProps> = ({
             >
               kristen watson awdawda awd awd
             </Text>
-            <Text
-              color="light.400"
-              fontSize={14}
-              fontFamily={"Lato"}
-              fontWeight={500}
-            >
-              12:30 PM
-            </Text>
+            {isTypeDefault && (
+              <Text
+                color="light.400"
+                fontSize={14}
+                fontFamily={"Lato"}
+                fontWeight={500}
+              >
+                12:30 PM
+              </Text>
+            )}
           </HStack>
           <HStack alignItems={"center"} space={2}>
             <Text
@@ -109,7 +121,7 @@ const MessageListItem: React.FC<MessageListItemProps> = ({
             >
               Lets meet today? awdawd awd awd awd
             </Text>
-            <MessageStatusIcon status={"unread"} />
+            {isTypeDefault && <MessageStatusIcon status={"unread"} />}
           </HStack>
         </VStack>
       </HStack>
