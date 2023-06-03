@@ -25,35 +25,34 @@ const ActionIcons = () => {
       <Tooltip
         label={label}
         openDelay={300}
-        bg="appPrimary"
+        bgColor={"appPrimary"}
         _text={{
           color: "#fff",
           fontFamily: "Lato",
           fontWeight: 500,
+          fontSize: 14,
         }}
       >
-        <Pressable
-          bg="appSecondary"
-          rounded={"xl"}
-          size={"50px"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          borderWidth="1px"
-          borderColor="transparent"
-          _hover={{
-            borderColor: !!color ? color : "light.400",
-            borderWidth: "1px",
-          }}
-        >
+        <Pressable>
           {({ isHovered }) => (
-            <IonIcon
-              // @ts-ignore
-              name={icon}
-              style={{
-                fontSize: "22px",
-                color: isHovered ? color || highlight : light,
-              }}
-            />
+            <Box
+              bg="appSecondary"
+              rounded={"xl"}
+              size={"50px"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              borderWidth="1px"
+              borderColor={isHovered ? "light.500" : "transparent"}
+            >
+              <IonIcon
+                // @ts-ignore
+                name={icon}
+                style={{
+                  fontSize: "22px",
+                  color: isHovered ? color || highlight : light,
+                }}
+              />
+            </Box>
           )}
         </Pressable>
       </Tooltip>
@@ -73,11 +72,7 @@ const ActionIcons = () => {
         </Text>
         <Pressable onPress={() => {}}>
           {({ isHovered }) => (
-            <Box
-              rounded="lg"
-              p={"1px"}
-              bg={isHovered ? "light.600" : "transparent"}
-            >
+            <Box rounded="lg" p={"1px"}>
               <IonIcon
                 // @ts-ignore
                 name={"close-outline"}
