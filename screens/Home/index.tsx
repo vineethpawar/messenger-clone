@@ -10,9 +10,11 @@ const Home = () => {
       <Box p={4} minW={"340px"} maxW={"380px"} flex={1}>
         <Sidebar />
       </Box>
+
       <Box flex={3}>
         <MessageChatSection />
       </Box>
+
       <Box p={4} flex={1} minW={"340px"} maxW={"380px"}>
         <MessageDetailsGroup />
       </Box>
