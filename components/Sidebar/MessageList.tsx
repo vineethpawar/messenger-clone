@@ -7,7 +7,7 @@ import SkeletonListItem from "../common/MessageListItem/SkeletonListItem";
 const MessageList = () => {
   return (
     <>
-      <HStack alignItems={"center"} px={3}>
+      <HStack alignItems={"center"} px={3} mb={2}>
         <Pressable mr="auto">
           <HStack space={2} alignItems={"center"}>
             <Text
