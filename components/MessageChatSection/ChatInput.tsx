@@ -14,7 +14,7 @@ const ChatInput: React.FC = () => {
 
   return (
     <Box px={3}>
-      <HStack py={2} bg="appSecondary" rounded={"lg"}>
+      <HStack mt={3} py={2} bg="appSecondary" rounded={"lg"}>
         <TextArea
           autoCompleteType={"on"}
           _focus={{ bg: "appSecondary" }}
@@ -30,12 +30,7 @@ const ChatInput: React.FC = () => {
           fontFamily={"Lato"}
           placeholder="Message"
           InputLeftElement={
-            <Pressable
-              onPress={() => {
-                alert("h");
-              }}
-              ml={4}
-            >
+            <Pressable onPress={() => {}} ml={4}>
               <IonIcon
                 style={{ fontSize: "24px", color: "white" }}
                 name="happy-outline"
@@ -44,21 +39,13 @@ const ChatInput: React.FC = () => {
           }
           InputRightElement={
             <HStack space={3} mr={4}>
-              <Pressable
-                onPress={() => {
-                  alert("h");
-                }}
-              >
+              <Pressable onPress={() => {}}>
                 <IonIcon
                   style={{ fontSize: "24px", color: "white" }}
                   name="attach-outline"
                 />
               </Pressable>
-              <Pressable
-                onPress={() => {
-                  alert("h");
-                }}
-              >
+              <Pressable onPress={() => {}}>
                 <IonIcon
                   style={{ fontSize: "24px", color: "white" }}
                   name="camera-outline"
