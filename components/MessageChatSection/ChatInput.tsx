@@ -30,26 +30,51 @@ const ChatInput: React.FC = () => {
           fontFamily={"Lato"}
           placeholder="Message"
           InputLeftElement={
-            <Pressable onPress={() => {}} ml={4}>
-              <IonIcon
-                style={{ fontSize: "24px", color: "white" }}
-                name="happy-outline"
-              />
+            <Pressable ml={4} onPress={() => {}}>
+              {({ isHovered }) => (
+                <Box
+                  rounded="lg"
+                  p={"4px"}
+                  bg={isHovered ? "light.500" : "transparent"}
+                >
+                  <IonIcon
+                    style={{ fontSize: "24px", color: "white" }}
+                    name="happy-outline"
+                  />
+                </Box>
+              )}
             </Pressable>
           }
           InputRightElement={
-            <HStack space={3} mr={4}>
+            <HStack alignItems={"center"} space={3} mr={4}>
               <Pressable onPress={() => {}}>
-                <IonIcon
-                  style={{ fontSize: "24px", color: "white" }}
-                  name="attach-outline"
-                />
+                {({ isHovered }) => (
+                  <Box
+                    rounded="lg"
+                    px={"2px"}
+                    py={"3px"}
+                    bg={isHovered ? "light.500" : "transparent"}
+                  >
+                    <IonIcon
+                      style={{ fontSize: "24px", color: "white" }}
+                      name="attach-outline"
+                    />
+                  </Box>
+                )}
               </Pressable>
               <Pressable onPress={() => {}}>
-                <IonIcon
-                  style={{ fontSize: "24px", color: "white" }}
-                  name="camera-outline"
-                />
+                {({ isHovered }) => (
+                  <Box
+                    rounded="lg"
+                    p={"4px"}
+                    bg={isHovered ? "light.500" : "transparent"}
+                  >
+                    <IonIcon
+                      style={{ fontSize: "23px", color: "white" }}
+                      name="camera-outline"
+                    />
+                  </Box>
+                )}
               </Pressable>
             </HStack>
           }
