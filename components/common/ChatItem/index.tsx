@@ -46,12 +46,12 @@ const ChatItem: React.FC<ChatItemProps> = ({ isMe = false }) => {
           <Text
             fontSize={16}
             lineHeight={16}
-            color="light.400"
+            color="light.300"
             fontFamily={"Lato"}
             fontWeight={500}
           >
             {
-              "This awdaw aw aw aw aw dwa da \n w dawd aw daawd aw aw awd awdawd d "
+              "This awdaw aw aw aw aw dwa da \n w dawd aw daawd awd ad aw awd awd  aw aw awd awdawd d "
             }
           </Text>
         </VStack>
