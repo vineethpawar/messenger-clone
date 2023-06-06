@@ -1,4 +1,4 @@
-import { ScrollView } from "native-base";
+import { Box, ScrollView, Spinner } from "native-base";
 import React, { useEffect, useRef, useState } from "react";
 import ChatItem from "../common/ChatItem";
 
@@ -44,6 +44,14 @@ const MessageChatBody = () => {
       <ChatItem />
       <ChatItem isMe />
     </ScrollView>
+  );
+};
+
+export const MessageChatBodySkeleton = () => {
+  return (
+    <Box alignItems={"center"} justifyContent={"center"} flex={1}>
+      <Spinner color="light.400" size={"lg"} />
+    </Box>
   );
 };
 
