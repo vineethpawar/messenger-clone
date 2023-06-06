@@ -1,8 +1,15 @@
 import IonIcon from "@reacticons/ionicons";
 import { Box, HStack, Pressable, TextArea } from "native-base";
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import { Theme } from "emoji-picker-react";
+import { Popover } from "native-base";
 
 const ChatInput: React.FC = () => {
+  const EmojiPicker = dynamic(() => import("emoji-picker-react"), {
+    ssr: false,
+  });
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [chatInputText, setChatInputText] = useState("");
   const [numLines, setNumLines] = useState(1);
 
@@ -30,20 +37,46 @@ const ChatInput: React.FC = () => {
           fontFamily={"Lato"}
           placeholder="Message"
           InputLeftElement={
-            <Pressable ml={4} onPress={() => {}}>
-              {({ isHovered }) => (
-                <Box
-                  rounded="lg"
-                  p={"4px"}
-                  bg={isHovered ? "light.500" : "transparent"}
-                >
-                  <IonIcon
-                    style={{ fontSize: "24px", color: "white" }}
-                    name="happy-outline"
-                  />
-                </Box>
+            <Popover
+              isOpen={showEmojiPicker}
+              onOpen={() => {
+                setShowEmojiPicker(true);
+              }}
+              onClose={() => {
+                setShowEmojiPicker(false);
+              }}
+              offset={7}
+              placement="top left"
+              trigger={(triggerProps) => (
+                <Pressable {...triggerProps} ml={4}>
+                  {({ isHovered }) => {
+                    return (
+                      <Box
+                        p={"4px"}
+                        rounded="lg"
+                        bg={isHovered ? "light.500" : "transparent"}
+                      >
+                        <IonIcon
+                          style={{ fontSize: "24px", color: "white" }}
+                          name="happy-outline"
+                        />
+                      </Box>
+                    );
+                  }}
+                </Pressable>
               )}
-            </Pressable>
+            >
+              <Popover.Content>
+                <EmojiPicker
+                  previewConfig={{
+                    showPreview: false,
+                  }}
+                  theme={Theme.DARK}
+                  height={"400px"}
+                  width={"290px"}
+                />
+              </Popover.Content>
+            </Popover>
           }
           InputRightElement={
             <HStack alignItems={"center"} space={3} mr={4}>
