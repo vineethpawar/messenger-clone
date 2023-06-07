@@ -72,7 +72,11 @@ const ActionIcons = () => {
         </Text>
         <Pressable onPress={() => {}}>
           {({ isHovered }) => (
-            <Box rounded="lg" p={"1px"}>
+            <Box
+              rounded="lg"
+              p={"1px"}
+              bg={isHovered ? "light.500" : "transparent"}
+            >
               <IonIcon
                 // @ts-ignore
                 name={"close-outline"}
