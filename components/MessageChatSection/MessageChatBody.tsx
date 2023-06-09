@@ -115,7 +115,10 @@ const MessageChatBody = () => {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <IonIcon name={"chevron-down"} style={{ fontSize: "14px" }} />
+            <IonIcon
+              name={"chevron-down"}
+              style={{ fontSize: "14px", color: "white" }}
+            />
           </Pressable>
         )}
       </Box>
