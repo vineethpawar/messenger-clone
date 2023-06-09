@@ -51,6 +51,10 @@ const MessageChatBody = () => {
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!autoScrollEnabled) {
+      if (prevScrollOffset < event.nativeEvent.contentOffset.y) {
+        setAutoScrollEnabled(true);
+        setShowScrollToBottomButton(false);
+      }
       setPrevScrollOffset(event.nativeEvent.contentOffset.y);
       return;
     }
@@ -71,7 +75,7 @@ const MessageChatBody = () => {
     clientWidth: number,
     clientHeight: number
   ) => {
-    if (autoScrollEnabled || prevScrollOffset === clientHeight) {
+    if (autoScrollEnabled) {
       scrollToBottom();
     } else {
       setShowScrollToBottomButton(true);
