@@ -22,18 +22,18 @@ const MessageChatBody = () => {
     scrollViewRef.current.scrollToEnd({ animated: false });
   }, [scrollViewRef.current, scrollViewRef]);
 
-  useEffect(() => {
-    // Simulating new message arrival
-    const timer = setInterval(() => {
-      const newMessage = `New Message ${messages.length + 1}`;
-      // @ts-ignore
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-    }, 3000);
+  // useEffect(() => {
+  //   // Simulating new message arrival
+  //   const timer = setInterval(() => {
+  //     const newMessage = `New Message ${messages.length + 1}`;
+  //     // @ts-ignore
+  //     setMessages((prevMessages) => [...prevMessages, newMessage]);
+  //   }, 3000);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, [messages]);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, [messages]);
 
   useEffect(() => {
     // Enable auto-scroll when new messages arrive and user is at the bottom
