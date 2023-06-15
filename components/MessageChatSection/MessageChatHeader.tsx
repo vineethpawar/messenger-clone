@@ -1,4 +1,12 @@
-import { HStack, Box, VStack, Text, Avatar, Pressable } from "native-base";
+import {
+  HStack,
+  Box,
+  VStack,
+  Text,
+  Avatar,
+  Pressable,
+  Skeleton,
+} from "native-base";
 import React from "react";
 
 const MessageChatHeader = () => {
@@ -118,4 +126,32 @@ const MessageChatHeader = () => {
   );
 };
 
+export const MessageChatHeaderSkeleton = () => {
+  return (
+    <HStack space={3} m={3} alignItems={"center"}>
+      <Skeleton
+        rounded={"full"}
+        size={"70px"}
+        startColor={"gray.500"}
+        endColor={"gray.700"}
+      />
+      <VStack space={4} flex={1}>
+        <Skeleton
+          h="20px"
+          maxW={"400px"}
+          rounded="full"
+          startColor={"gray.500"}
+          endColor={"gray.700"}
+        />
+        <Skeleton
+          h="20px"
+          maxW={"300px"}
+          rounded="full"
+          startColor={"gray.500"}
+          endColor={"gray.700"}
+        />
+      </VStack>
+    </HStack>
+  );
+};
 export default MessageChatHeader;

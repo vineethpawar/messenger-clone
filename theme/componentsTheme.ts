@@ -3,6 +3,10 @@ export const componentsTheme = {
     variants: {},
   },
   Text: {
+    defaultProps: {
+      fontFamily: "Lato",
+      fontWeight: 500,
+    },
     variants: {},
   },
 

@@ -22,18 +22,18 @@ const MessageChatBody = () => {
     scrollViewRef.current.scrollToEnd({ animated: false });
   }, [scrollViewRef.current, scrollViewRef]);
 
-  useEffect(() => {
-    // Simulating new message arrival
-    const timer = setInterval(() => {
-      const newMessage = `New Message ${messages.length + 1}`;
-      // @ts-ignore
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-    }, 3000);
+  // useEffect(() => {
+  //   // Simulating new message arrival
+  //   const timer = setInterval(() => {
+  //     const newMessage = `New Message ${messages.length + 1}`;
+  //     // @ts-ignore
+  //     setMessages((prevMessages) => [...prevMessages, newMessage]);
+  //   }, 3000);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, [messages]);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, [messages]);
 
   useEffect(() => {
     // Enable auto-scroll when new messages arrive and user is at the bottom
@@ -51,6 +51,10 @@ const MessageChatBody = () => {
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!autoScrollEnabled) {
+      if (prevScrollOffset < event.nativeEvent.contentOffset.y) {
+        setAutoScrollEnabled(true);
+        setShowScrollToBottomButton(false);
+      }
       setPrevScrollOffset(event.nativeEvent.contentOffset.y);
       return;
     }
@@ -71,7 +75,7 @@ const MessageChatBody = () => {
     clientWidth: number,
     clientHeight: number
   ) => {
-    if (autoScrollEnabled || prevScrollOffset === clientHeight) {
+    if (autoScrollEnabled) {
       scrollToBottom();
     } else {
       setShowScrollToBottomButton(true);
@@ -83,7 +87,10 @@ const MessageChatBody = () => {
         scrollEventThrottle={50}
         px={2}
         ref={scrollViewRef}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={
+          // @ts-ignore
+          scrollViewRef?.current?.scrollHeight > 1500 ? true : false
+        }
         _contentContainerStyle={{ mt: "auto", mb: "0" }}
         flex={1}
         onContentSizeChange={handleContentSizeChange}
@@ -111,7 +118,10 @@ const MessageChatBody = () => {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <IonIcon name={"chevron-down"} style={{ fontSize: "14px" }} />
+            <IonIcon
+              name={"chevron-down"}
+              style={{ fontSize: "14px", color: "white" }}
+            />
           </Pressable>
         )}
       </Box>
