@@ -87,7 +87,10 @@ const MessageChatBody = () => {
         scrollEventThrottle={50}
         px={2}
         ref={scrollViewRef}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={
+          // @ts-ignore
+          scrollViewRef?.current?.scrollHeight > 1500 ? true : false
+        }
         _contentContainerStyle={{ mt: "auto", mb: "0" }}
         flex={1}
         onContentSizeChange={handleContentSizeChange}

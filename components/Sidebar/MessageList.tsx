@@ -34,7 +34,12 @@ const MessageList = () => {
           />
         </Pressable>
       </HStack>
-      <ScrollView showsVerticalScrollIndicator={false} flex={1}>
+      <ScrollView
+        pr={2}
+        persistentScrollbar
+        showsVerticalScrollIndicator={true}
+        flex={1}
+      >
         <MessageListItem />
         <MessageListItem isSelected />
         <MessageListItem />

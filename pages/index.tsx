@@ -14,7 +14,7 @@ import {
 const App: React.FC = () => {
   return (
     <VStack>
-      <Slide in={true} placement="top">
+      <Slide in={false} placement="top">
         <Alert w="100%" status={"error"}>
           <VStack space={2} flexShrink={1} w="100%">
             <HStack
