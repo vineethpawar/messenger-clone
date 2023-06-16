@@ -3,10 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import ChatItem from "../common/ChatItem";
 import { NativeSyntheticEvent, NativeScrollEvent } from "react-native";
 import IonIcon from "@reacticons/ionicons";
+import pubnub from "../../utils/pubnub";
 
 const MessageChatBody = () => {
   const scrollViewRef = useRef();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Array<any>>([]);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const [showScrollToBottomButton, setShowScrollToBottomButton] =
     useState(false);
@@ -19,8 +20,8 @@ const MessageChatBody = () => {
     // Start from bottom
     // TODO: replace later to start from where messages are not read
     // @ts-ignore
-    scrollViewRef.current.scrollToEnd({ animated: false });
-  }, [scrollViewRef.current, scrollViewRef]);
+    scrollViewRef?.current?.scrollToEnd({ animated: false });
+  }, [scrollViewRef?.current, scrollViewRef]);
 
   // useEffect(() => {
   //   // Simulating new message arrival
@@ -42,33 +43,102 @@ const MessageChatBody = () => {
     }
   }, [messages]);
 
+  const channel = "my_channel";
+  const messageCount = 100; // Number of messages to retrieve
+  // PUBNUB HISTORY
+  useEffect(() => {
+    pubnub.hereNow(
+      {
+        channels: [channel],
+        includeUUIDs: true,
+      },
+      (status, response) => {
+        if (status.error) {
+          console.error(
+            "Error retrieving presence information:",
+            status.errorData
+          );
+          return;
+        }
+
+        // Retrieve past messages using the History API
+        pubnub.history(
+          {
+            channel: channel,
+            count: messageCount,
+          },
+          (status, response) => {
+            if (status.error) {
+              console.error("Error retrieving history:", status.errorData);
+              return;
+            }
+
+            const pastMessages = response.messages;
+
+            setMessages(pastMessages);
+          }
+        );
+      }
+    );
+  }, []);
+  // PUBNUB LISTENERS
+  useEffect(() => {
+    // Subscribe to a PubNub channel
+    pubnub.subscribe({
+      channels: [channel],
+    });
+
+    // Receive messages from the subscribed channel
+    pubnub.addListener({
+      message: (message) => {
+        setMessages((messages) => [...messages, message]);
+      },
+    });
+
+    // Publish a message to the channel
+    // pubnub.publish({
+    //   channel: "my_channel",
+    //   message: {
+    //     publisher: "John",
+    //     text: "Hello guys!!",
+    //   },
+    // });
+
+    // Unsubscribe from the channel when the component unmounts
+    return () => {
+      pubnub.unsubscribe({
+        channels: ["my_channel"],
+      });
+    };
+  }, []);
+
   const scrollToBottom = () => {
     // @ts-ignore
-    scrollViewRef.current.scrollToEnd({ animated: true });
+    scrollViewRef?.current?.scrollToEnd({ animated: true });
     setAutoScrollEnabled(true);
     setShowScrollToBottomButton(false);
   };
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (!autoScrollEnabled) {
-      if (prevScrollOffset < event.nativeEvent.contentOffset.y) {
-        setAutoScrollEnabled(true);
-        setShowScrollToBottomButton(false);
-      }
-      setPrevScrollOffset(event.nativeEvent.contentOffset.y);
-      return;
-    }
-    // const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
-    console.log("NE", event.nativeEvent.contentOffset.y);
-    // Check if user scrolled to the top
-    if (prevScrollOffset > event.nativeEvent.contentOffset.y) {
-      setAutoScrollEnabled(false);
-      setShowScrollToBottomButton(true);
-    } else {
-      setAutoScrollEnabled(true);
-      setShowScrollToBottomButton(false);
-    }
-    setPrevScrollOffset(event.nativeEvent.contentOffset.y);
+    // if (!autoScrollEnabled) {
+    //   if (prevScrollOffset < event.nativeEvent.contentOffset.y) {
+    //     setAutoScrollEnabled(true);
+    //     setShowScrollToBottomButton(false);
+    //   }
+    //   setPrevScrollOffset(event.nativeEvent.contentOffset.y);
+    //   return;
+    // }
+    // // const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+    // // console.log("NE", event.nativeEvent.contentOffset.y);
+    // // Check if user scrolled to the top
+    // if (prevScrollOffset > event.nativeEvent.contentOffset.y) {
+    //   setAutoScrollEnabled(false);
+    //   setShowScrollToBottomButton(true);
+    // } else {
+    //   setAutoScrollEnabled(true);
+    //   setShowScrollToBottomButton(false);
+    // }
+    // setPrevScrollOffset(event.nativeEvent.contentOffset.y);
   };
 
   const handleContentSizeChange = (
@@ -81,7 +151,10 @@ const MessageChatBody = () => {
       setShowScrollToBottomButton(true);
     }
   };
-  return (
+
+  return !messages?.length ? (
+    <MessageChatBodySkeleton />
+  ) : (
     <Box position={"relative"} flex={1}>
       <ScrollView
         scrollEventThrottle={50}
@@ -96,14 +169,8 @@ const MessageChatBody = () => {
         onContentSizeChange={handleContentSizeChange}
         onScroll={handleScroll}
       >
-        <ChatItem isMe />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem isMe />
-        <ChatItem />
-        <ChatItem />
-        {messages.map((message, index) => (
-          <ChatItem key={index} />
+        {messages.map((message) => (
+          <ChatItem key={message?.timetoken} message={message} />
         ))}
       </ScrollView>
       <Box position={"absolute"} bottom={0} w={"100%"} zIndex={100}>

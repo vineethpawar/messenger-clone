@@ -1,10 +1,12 @@
 import { Box, HStack, Text, VStack } from "native-base";
 import React from "react";
+import { messageSentTimeFormat } from "../../../utils/messageSentTimeFormat";
 
 interface ChatItemProps {
   isMe?: boolean;
+  mesage: any;
 }
-const ChatItem: React.FC<ChatItemProps> = ({ isMe = false }) => {
+const ChatItem: React.FC<ChatItemProps> = ({ isMe = false, message }) => {
   return (
     <HStack direction={isMe ? "row-reverse" : "row"} p={2}>
       <Box
@@ -24,7 +26,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ isMe = false }) => {
             noOfLines={1}
             textTransform={"capitalize"}
           >
-            Friendly chat
+            {message?.entry?.publisher}
           </Text>
           <Box size={"10px"} />
           <Text
@@ -33,7 +35,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ isMe = false }) => {
             fontFamily={"Lato"}
             fontWeight={500}
           >
-            12:30 PM
+            {messageSentTimeFormat(message?.timetoken)}
           </Text>
         </HStack>
 
@@ -50,9 +52,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ isMe = false }) => {
             fontFamily={"Lato"}
             fontWeight={500}
           >
-            {
-              "This awdaw aw aw aw aw dwa da \n w dawd aw daawd awd ad aw awd awd  aw aw awd awdawd d "
-            }
+            {message?.entry?.text}
           </Text>
         </VStack>
       </VStack>
