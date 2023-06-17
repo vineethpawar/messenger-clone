@@ -67,6 +67,7 @@ const SharedPhotos = () => {
       <HStack flexWrap={"wrap"}>
         {images?.map((img, idx) => (
           <ImageGridItem
+            key={idx}
             dimensionType={
               idx % 4 === 1 || idx % 4 === 2 ? "rectangle" : "square"
             }
@@ -93,6 +94,7 @@ export const SharedPhotosSkeletonUI = () => {
       <HStack flexWrap={"wrap"}>
         {images?.map((img, idx) => (
           <ImageGridItem
+            key={idx}
             isLoading
             dimensionType={
               idx % 4 === 1 || idx % 4 === 2 ? "rectangle" : "square"

@@ -37,7 +37,7 @@ const SharedLinks = () => {
       </HStack>
       <VStack>
         {images?.map((img, idx) => (
-          <MessageListItem type="link" />
+          <MessageListItem key={idx} type="link" />
         ))}
       </VStack>
     </VStack>
@@ -59,7 +59,7 @@ export const SharedLinksSkeletonUI = () => {
       </Box>
       <VStack px={1}>
         {lists?.map((img, idx) => (
-          <SkeletonListItem type="link" />
+          <SkeletonListItem key={idx} type="link" />
         ))}
       </VStack>
     </VStack>
