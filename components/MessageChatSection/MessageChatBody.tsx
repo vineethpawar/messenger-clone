@@ -44,7 +44,7 @@ const MessageChatBody = () => {
   }, [messages]);
 
   const channel = "my_channel";
-  const messageCount = 100; // Number of messages to retrieve
+  const messageCount = 30; // Number of messages to retrieve
   // PUBNUB HISTORY
   useEffect(() => {
     pubnub.hereNow(
@@ -170,6 +170,7 @@ const MessageChatBody = () => {
         onScroll={handleScroll}
       >
         {messages.map((message) => (
+          // @ts-ignore
           <ChatItem key={message?.timetoken} message={message} />
         ))}
       </ScrollView>
