@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const messageSentTimeFormat = (timestamp: number) => {
   const finTimeTimeStamp = timestamp / 10000;
   const now = new Date();

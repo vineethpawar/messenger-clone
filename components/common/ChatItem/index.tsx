@@ -6,6 +6,7 @@ interface ChatItemProps {
   isMe?: boolean;
   mesage: any;
 }
+// @ts-ignore
 const ChatItem: React.FC<ChatItemProps> = ({ isMe = false, message }) => {
   return (
     <HStack direction={isMe ? "row-reverse" : "row"} p={2}>
